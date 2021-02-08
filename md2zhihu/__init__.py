@@ -4,6 +4,7 @@ import re
 import shutil
 import argparse
 import hashlib
+import urllib.request
 
 import k3down2
 import yaml
@@ -572,6 +573,10 @@ def image_local_to_remote(mdrender, n, ctx=None):
 
     src = n['src']
     if re.match(r'https?://', src):
+        fn = src.split('/')[-1].split('#')[0].split('?')[0]
+        urllib.request.urlretrieve(src, pjoin(mdrender.conf.output_dir, fn))
+
+        n['src'] = mdrender.conf.img_url(fn)
         return None
 
     if src.startswith('/'):
