@@ -6,8 +6,8 @@ cp setup.py ..
 (
 cd ..
 rm dist/*
-python setup.py sdist bdist_wheel
-pip install dist/*.tar.gz
+python3 setup.py sdist bdist_wheel
+pip3 install dist/*.tar.gz
 )
 
 PYTHONPATH="$(cd ..; pwd)" pytest -x
